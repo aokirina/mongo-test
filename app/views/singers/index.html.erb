@@ -1,0 +1,37 @@
+<h1>Listing singers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @singers.each do |singer| %>
+      <tr>
+        <td><%= singer.name %></td>
+        <td><%= link_to 'Show', singer %></td>
+        <td><%= link_to 'Edit', edit_singer_path(singer) %></td>
+        <td><%= link_to 'Destroy', singer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<tbody>
+  <% for table_name in ActiveRecord::Base.connection.tables %>
+  <% model_object = table_name.classify.constantize %>
+  <%= model_object.name %>
+  <%= for column_name in model_object.column_names %>
+  <%= "  %s"%column_name %>
+  <% end %>
+<% end %>
+</tbody>
+
+
+
+<br>
+
+<%= link_to 'New Singer', new_singer_path %>
